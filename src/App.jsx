@@ -1,3 +1,6 @@
+import React from "react";
+import ReactDOM from "react-dom";
+
 const Pet = (props) => {
     return React.createElement(
         "div", 
@@ -7,7 +10,7 @@ const Pet = (props) => {
         React.createElement("h2", {}, props.animal),
         React.createElement("h2", {}, props.breed)
         ]
-    )
+    );
 };
 
 //Always capitalize component names
@@ -21,7 +24,7 @@ const App = () => {
         React.createElement(Pet, {name: "Happy", animal: "Cat", breed: "Unknown"}),
         React.createElement(Pet, {name: "Dutch", animal: "Dog", breed: "Doberman"})
         ]
-    )
+    );
 };
 
 const container = document.getElementById('root'); //grab root element
