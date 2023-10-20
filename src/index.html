@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adopt Me! v8</title>
+    <link rel="stylesheet" href="./style.css"/>
+</head>
+<body>
+    <div id="root">Not rendered</div>
+
+    <!-- Separated out scripts to enable React and the React DOM renderer -->
+    <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+
+    <!-- Our React code-->
+    <script>
+        //Always capitalize component names
+        const App = () => {
+            return React.createElement(
+                "div", //tag to be created
+                {}, //attributes go in here, or an empty object/null
+                React.createElement("h1", {}, "Adopt Me!") //items inside the created tag
+            )
+        };
+
+        const container = document.getElementById('root'); //grab root element
+        const root = ReactDOM.createRoot(container); //point to it with the virtual DOM
+        root.render(React.createElement(App)); //tell the DOM to render the component called App
+    </script>
+</body>
+</html>
