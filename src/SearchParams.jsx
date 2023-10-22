@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Pet from "./Pet"
 
 const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
 
@@ -11,7 +12,24 @@ const SearchParams = () => {
     let [location, setLocation] = useState("");
     let [animal, setAnimal] = useState("");
     let [breed, setBreed] = useState("");
+    let [pets, setPets] = useState([]);
     let breeds = []; //empty array to hold breeds when we get the list from API later
+
+    //every time we re-render the component, go run this effect to get info from the API
+    useEffect(() => {
+        requestPets();
+    });
+
+    //make an API call to retrieve pet info and put it into pets array
+    async function requestPets(){
+        const res = await fetch(
+            `https://pets-v2.dev-apis.com/pets?animal=${animal}&location=${location}&breed=${breed}`
+        );
+
+        const json = await res.json();
+
+        setPets(json.pets);
+    }
 
     return (
         <div className="search-params">
@@ -67,6 +85,14 @@ const SearchParams = () => {
 
                 <button>Submit</button>
             </form>
+
+            {
+                pets.map(pet => {
+                    <Pet name={pet.name} animal={pet.animal} 
+                        breed={pet.breed} key={pet.id} />
+                })
+            }
+
         </div>
     );
 }
