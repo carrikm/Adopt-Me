@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Pet from "./Pet"
+import useBreedList from "./useBreedList";
 
 const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
 
@@ -13,7 +14,7 @@ const SearchParams = () => {
     let [animal, setAnimal] = useState("");
     let [breed, setBreed] = useState("");
     let [pets, setPets] = useState([]);
-    let breeds = []; //empty array to hold breeds when we get the list from API later
+    let [breeds] = useBreedList(animal);
 
     //every time we re-render the component, go run this effect to get info from the API
     useEffect(() => {
@@ -84,8 +85,7 @@ const SearchParams = () => {
                         ))}
                     </select>
                 </label>
-
-
+                
                 <button>Submit</button>
             </form>
 
