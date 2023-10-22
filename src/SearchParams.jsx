@@ -18,7 +18,7 @@ const SearchParams = () => {
     //every time we re-render the component, go run this effect to get info from the API
     useEffect(() => {
         requestPets();
-    });
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     //make an API call to retrieve pet info and put it into pets array
     async function requestPets(){
@@ -33,7 +33,10 @@ const SearchParams = () => {
 
     return (
         <div className="search-params">
-            <form>
+            <form onSubmit={e => {
+                e.preventDefault();
+                requestPets();
+            }}>
                 <label htmlFor="location">
                     Location
                     <input 
@@ -87,10 +90,10 @@ const SearchParams = () => {
             </form>
 
             {
-                pets.map(pet => {
+                pets.map((pet) => (
                     <Pet name={pet.name} animal={pet.animal} 
                         breed={pet.breed} key={pet.id} />
-                })
+                ))
             }
 
         </div>
